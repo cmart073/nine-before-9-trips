@@ -111,38 +111,55 @@ function handleAffiliateRedirect(pathname) {
 
 // Send Lead Notification Email
 async function sendLeadNotification(data, env) {
-  // This is a placeholder - integrate with your email service
-  // Options: Cloudflare Email Workers, Resend, SendGrid, Mailgun, etc.
+  // Email notification to cmart073@gmail.com
+  // Using Cloudflare Email Workers or external email API
   
-  // Example using fetch to an email API:
-  /*
-  const emailPayload = {
-    to: 'contact@ninebefore9.us',
-    from: 'leads@ninebefore9.us',
-    subject: `New Trip Planning Lead: ${data.destination}`,
-    text: `
-      New trip planning inquiry:
-      
-      Name: ${data.name}
-      Email: ${data.email}
-      Group Size: ${data.groupSize}
-      Target Dates: ${data.targetDates}
-      Destination: ${data.destination}
-      Source: ${data.source}
-      Timestamp: ${data.timestamp}
-    `
-  };
+  const emailBody = `
+New Trip Planning Inquiry
 
-  await fetch('YOUR_EMAIL_API_ENDPOINT', {
-    method: 'POST',
-    headers: {
-      'Authorization': `Bearer ${env.EMAIL_API_KEY}`,
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(emailPayload)
-  });
-  */
+Name: ${data.name}
+Email: ${data.email}
+Destination: ${data.destination || 'Not specified'}
+Group Size: ${data.groupSize || 'Not specified'}
+Target Dates: ${data.targetDates || 'Not specified'}
+${data.notes ? `Additional Notes: ${data.notes}` : ''}
 
-  // For now, just log it
-  console.log('New lead:', data);
+Source: ${data.source}
+Timestamp: ${data.timestamp}
+
+Reply directly to ${data.email} to follow up.
+  `.trim();
+
+  // Option 1: Using Cloudflare Email Workers (if configured)
+  // Requires email routing setup in Cloudflare dashboard
+  if (env.EMAIL_ENABLED) {
+    try {
+      await fetch('https://api.mailchannels.net/tx/v1/send', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          personalizations: [{
+            to: [{ email: 'cmart073@gmail.com', name: 'Nine Before 9 Trips' }],
+            reply_to: { email: data.email, name: data.name }
+          }],
+          from: {
+            email: 'leads@ninebefore9.us',
+            name: 'Nine Before 9 Trips Lead Form'
+          },
+          subject: `New Trip Inquiry: ${data.destination || 'General'} - ${data.name}`,
+          content: [{
+            type: 'text/plain',
+            value: emailBody
+          }]
+        })
+      });
+    } catch (emailError) {
+      console.error('Email sending failed:', emailError);
+    }
+  }
+  
+  // Always log to console (visible in Cloudflare Workers logs)
+  console.log('New lead submission:', JSON.stringify(data, null, 2));
 }
