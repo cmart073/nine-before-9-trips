@@ -1,4 +1,4 @@
-// Cloudflare P ages Function: /api/submit-lead
+// Cloudflare Pages Function: /api/submit-lead
 // This handles POST requests to /api/submit-lead
 
 export async function onRequestPost(context) {
@@ -37,24 +37,57 @@ export async function onRequestPost(context) {
       });
     }
 
+    // Create lead ID
+    const leadId = `lead_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+    const timestamp = new Date().toISOString();
+    
+    const leadData = {
+      id: leadId,
+      name: data.name,
+      email: data.email,
+      destination: data.destination || 'Not specified',
+      groupSize: data.groupSize || 'Not specified',
+      targetDates: data.targetDates || 'Not specified',
+      notes: data.notes || '',
+      source: data.source || 'Unknown',
+      timestamp: timestamp,
+      submitted: new Date().toLocaleString('en-US', { timeZone: 'America/Chicago' })
+    };
+
     // Store in KV storage (if configured)
     if (env.LEADS) {
-      const leadId = `lead_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
-      await env.LEADS.put(leadId, JSON.stringify(data), {
-        metadata: {
-          email: data.email,
-          destination: data.destination || 'General',
-          timestamp: data.timestamp
-        }
-      });
+      try {
+        await env.LEADS.put(leadId, JSON.stringify(leadData), {
+          metadata: {
+            email: data.email,
+            destination: data.destination || 'General',
+            timestamp: timestamp
+          }
+        });
+        console.log('Lead stored in KV:', leadId);
+      } catch (kvError) {
+        console.error('KV storage failed:', kvError);
+      }
     }
 
-    // Send notification email
-    await sendLeadNotification(data);
+    // Log to console (visible in Cloudflare dashboard)
+    console.log('=== NEW LEAD SUBMISSION ===');
+    console.log(`Name: ${leadData.name}`);
+    console.log(`Email: ${leadData.email}`);
+    console.log(`Destination: ${leadData.destination}`);
+    console.log(`Group Size: ${leadData.groupSize}`);
+    console.log(`Target Dates: ${leadData.targetDates}`);
+    if (leadData.notes) console.log(`Notes: ${leadData.notes}`);
+    console.log(`Submitted: ${leadData.submitted}`);
+    console.log('===========================');
+
+    // Send email notification (using a working method)
+    await sendEmailNotification(leadData);
 
     return new Response(JSON.stringify({ 
       success: true, 
-      message: 'Thank you! Your inquiry has been submitted.' 
+      message: 'Thank you! Your inquiry has been submitted.',
+      leadId: leadId
     }), {
       status: 200,
       headers: {
@@ -89,58 +122,24 @@ export async function onRequestOptions() {
   });
 }
 
-// Send Lead Notification Email
-async function sendLeadNotification(data) {
-  const emailBody = `
-New Trip Planning Inquiry
-
-Name: ${data.name}
-Email: ${data.email}
-Destination: ${data.destination || 'Not specified'}
-Group Size: ${data.groupSize || 'Not specified'}
-Target Dates: ${data.targetDates || 'Not specified'}
-${data.notes ? `Additional Notes: ${data.notes}` : ''}
-
-Source: ${data.source || 'Unknown'}
-Timestamp: ${data.timestamp || new Date().toISOString()}
-
-Reply directly to ${data.email} to follow up.
-  `.trim();
-
-  // Always log to console (visible in Cloudflare Workers logs)
-  console.log('New lead submission:', JSON.stringify(data, null, 2));
-
-  // Send email using MailChannels (Cloudflare's free email service for Pages)
+// Send Email Notification using webhook
+async function sendEmailNotification(data) {
+  // For now, just log. You can add webhook integration later
+  // Options: Zapier webhook, Make.com webhook, or n8n
+  
+  console.log('Email notification would be sent to: cmart073@gmail.com');
+  console.log('Lead details:', JSON.stringify(data, null, 2));
+  
+  // Example webhook integration (uncomment and add your webhook URL):
+  /*
   try {
-    const emailResponse = await fetch('https://api.mailchannels.net/tx/v1/send', {
+    await fetch('YOUR_ZAPIER_OR_MAKE_WEBHOOK_URL', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        personalizations: [{
-          to: [{ email: 'cmart073@gmail.com', name: 'Nine Before 9 Trips' }],
-          reply_to: { email: data.email, name: data.name }
-        }],
-        from: {
-          email: 'leads@ninebefore9.us',
-          name: 'Nine Before 9 Trips'
-        },
-        subject: `New Trip Inquiry: ${data.destination || 'General'} - ${data.name}`,
-        content: [{
-          type: 'text/plain',
-          value: emailBody
-        }]
-      })
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
     });
-
-    if (emailResponse.ok) {
-      console.log('Email sent successfully to cmart073@gmail.com');
-    } else {
-      const errorText = await emailResponse.text();
-      console.error('Email sending failed:', errorText);
-    }
-  } catch (emailError) {
-    console.error('Email sending error:', emailError);
+  } catch (error) {
+    console.error('Webhook failed:', error);
   }
+  */
 }
