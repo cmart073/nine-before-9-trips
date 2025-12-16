@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lead Dashboard - Nine Before 9 Trips</title>
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="stylesheet" href="/styles.css">
+    <style>
+        .admin-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+        .leads-table {
+            width: 100%;
+            margin-top: 2rem;
+            border-collapse: collapse;
+            background: white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .leads-table th,
+        .leads-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        .leads-table th {
+            background: var(--color-fairway);
+            color: white;
+            font-weight: 600;
+        }
+        .leads-table tr:hover {
+            background: #f8f9fa;
+        }
+        .lead-email {
+            color: var(--color-fairway);
+            font-weight: 500;
+        }
+        .lead-notes {
+            font-size: 0.9rem;
+            color: #666;
+            max-width: 300px;
+        }
+        .no-leads {
+            text-align: center;
+            padding: 3rem;
+            color: #999;
+        }
+        .refresh-btn {
+            background: var(--color-sand);
+            color: var(--color-fairway);
+            border: none;
+            padding: 0.75rem 1.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 1rem;
+        }
+        .refresh-btn:hover {
+            background: var(--color-fairway);
+            color: white;
+        }
+        .password-form {
+            max-width: 400px;
+            margin: 4rem auto;
+            padding: 2rem;
+            background: white;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+        }
+        .password-form input {
+            width: 100%;
+            padding: 0.75rem;
+            margin: 1rem 0;
+            border: 2px solid #e0e0e0;
+        }
+        .password-form button {
+            width: 100%;
+            background: var(--color-fairway);
+            color: white;
+            border: none;
+            padding: 0.75rem;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        .error-message {
+            color: #dc3545;
+            margin-top: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="container">
+            <div class="header-content">
+                <a href="/" class="logo">Nine Before 9 Trips</a>
+                <nav class="main-nav">
+                    <a href="/">Home</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <div class="admin-container">
+        <div id="passwordPrompt" class="password-form">
+            <h2>Admin Access</h2>
+            <p>Enter password to view leads:</p>
+            <input type="password" id="passwordInput" placeholder="Password">
+            <button onclick="checkPassword()">Access Dashboard</button>
+            <p id="errorMsg" class="error-message" style="display: none;">Incorrect password</p>
+        </div>
+
+        <div id="dashboard" style="display: none;">
+            <h1>Lead Submissions</h1>
+            <button class="refresh-btn" onclick="loadLeads()">Refresh</button>
+            
+            <div id="leadsContainer">
+                <p class="no-leads">Loading leads...</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Simple password protection (for basic security)
+        // Change this password to something secure
+        const ADMIN_PASSWORD = 'ninebefore9admin';
+        
+        function checkPassword() {
+            const input = document.getElementById('passwordInput').value;
+            if (input === ADMIN_PASSWORD) {
+                document.getElementById('passwordPrompt').style.display = 'none';
+                document.getElementById('dashboard').style.display = 'block';
+                loadLeads();
+            } else {
+                document.getElementById('errorMsg').style.display = 'block';
+            }
+        }
+
+        async function loadLeads() {
+            const container = document.getElementById('leadsContainer');
+            container.innerHTML = '<p class="no-leads">Loading leads...</p>';
+            
+            try {
+                const response = await fetch('/api/get-leads');
+                const data = await response.json();
+                
+                if (data.leads && data.leads.length > 0) {
+                    displayLeads(data.leads);
+                } else {
+                    container.innerHTML = '<p class="no-leads">No leads yet. Check back after form submissions.</p>';
+                }
+            } catch (error) {
+                console.error('Error loading leads:', error);
+                container.innerHTML = '<p class="no-leads">Error loading leads. Make sure KV namespace is configured.</p>';
+            }
+        }
+
+        function displayLeads(leads) {
+            const container = document.getElementById('leadsContainer');
+            
+            const table = `
+                <table class="leads-table">
+                    <thead>
+                        <tr>
+                            <th>Submitted</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Destination</th>
+                            <th>Group Size</th>
+                            <th>Target Dates</th>
+                            <th>Notes</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${leads.map(lead => `
+                            <tr>
+                                <td>${lead.submitted || lead.timestamp}</td>
+                                <td>${lead.name}</td>
+                                <td><a href="mailto:${lead.email}" class="lead-email">${lead.email}</a></td>
+                                <td>${lead.destination}</td>
+                                <td>${lead.groupSize}</td>
+                                <td>${lead.targetDates}</td>
+                                <td class="lead-notes">${lead.notes || '-'}</td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+            `;
+            
+            container.innerHTML = table;
+        }
+
+        // Allow Enter key to submit password
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('passwordInput').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    checkPassword();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
