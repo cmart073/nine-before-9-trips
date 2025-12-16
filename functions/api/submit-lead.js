@@ -1,4 +1,4 @@
-// Cloudflare Pages Function: /api/submit-lead
+// Cloudflare P ages Function: /api/submit-lead
 // This handles POST requests to /api/submit-lead
 
 export async function onRequestPost(context) {
