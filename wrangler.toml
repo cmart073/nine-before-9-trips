@@ -1,0 +1,12 @@
+name = "nine-before-9-trips"
+compatibility_date = "2025-01-01"
+pages_build_output_dir = "."
+
+# KV Namespace for lead storage (optional - create in Cloudflare dashboard)
+# [[kv_namespaces]]
+# binding = "LEADS"
+# id = "YOUR_KV_NAMESPACE_ID"
+
+# Environment variables (set in Cloudflare dashboard or via CLI)
+# [vars]
+# EMAIL_API_KEY = "your-email-service-api-key"

@@ -1,0 +1,12 @@
+# Cloudflare Pages Redirects
+# Note: The Worker handles /go/* redirects dynamically
+# This file serves as documentation and fallback
+
+# If Worker is not active, these redirects will handle affiliate links
+/go/bandon-hotels  https://www.booking.com/searchresults.html?ss=Bandon+Dunes+Golf+Resort  302
+/go/bandon-flights  https://www.google.com/flights?q=flights+to+north+bend+oregon  302
+/go/bandon-car  https://www.rentalcars.com/SearchResults.do?city=North+Bend+Oregon  302
+
+# Future affiliate links
+# /go/scotland-hotels  YOUR_AFFILIATE_URL  302
+# /go/pinehurst-hotels  YOUR_AFFILIATE_URL  302
