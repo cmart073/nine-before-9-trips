@@ -22,9 +22,10 @@ document.addEventListener('DOMContentLoaded', function() {
         const formData = {
             name: form.querySelector('#name').value,
             email: form.querySelector('#email').value,
-            groupSize: form.querySelector('#groupSize').value,
-            targetDates: form.querySelector('#targetDates').value,
-            destination: 'Bandon Dunes',
+            groupSize: form.querySelector('#groupSize') ? form.querySelector('#groupSize').value : '',
+            targetDates: form.querySelector('#targetDates') ? form.querySelector('#targetDates').value : '',
+            destination: form.querySelector('#destination') ? form.querySelector('#destination').value : '',
+            notes: form.querySelector('#notes') ? form.querySelector('#notes').value : '',
             timestamp: new Date().toISOString(),
             source: window.location.href
         };
@@ -49,7 +50,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (window.gtag) {
                     gtag('event', 'generate_lead', {
                         'event_category': 'Lead Capture',
-                        'event_label': 'Bandon Dunes Trip Planning'
+                        'event_label': formData.destination || 'General Inquiry'
                     });
                 }
             } else {
@@ -58,7 +59,7 @@ document.addEventListener('DOMContentLoaded', function() {
             
         } catch (error) {
             // Error handling
-            formMessage.textContent = 'Sorry, something went wrong. Please email directly at contact@ninebefore9.us';
+            formMessage.textContent = 'Sorry, something went wrong. Please email directly at cmart073@gmail.com';
             formMessage.className = 'form-message error';
         } finally {
             // Re-enable button
