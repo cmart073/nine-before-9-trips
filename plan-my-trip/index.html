@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plan Your Golf Trip - Nine Before 9 Trips</title>
+    <meta name="description" content="Get help planning your golf trip. Connect with trusted travel partners who specialize in golf destinations.">
+    <link rel="canonical" href="https://ninebefore9.us/plan-my-trip/" />
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="container">
+            <div class="header-content">
+                <a href="/" class="logo">Nine Before 9 Trips</a>
+                <nav class="main-nav">
+                    <a href="/trips/">Trips</a>
+                    <a href="/#about">About</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <article class="trip-guide">
+            <div class="container">
+                <div class="guide-intro">
+                    <h1>Plan Your Golf Trip</h1>
+                    <p class="lead">Tell me about your trip and I'll connect you with a trusted golf travel partner who can help coordinate lodging, tee times, and logistics.</p>
+                </div>
+
+                <section class="guide-section lead-capture" style="max-width: 600px; margin: 3rem auto;">
+                    <h2>Trip Details</h2>
+                    <p>Fill out the form below and I'll be in touch within 24 hours to discuss your trip.</p>
+                    
+                    <form class="trip-planning-form" id="tripPlanningForm">
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="destination">Destination</label>
+                            <select id="destination" name="destination" required style="width: 100%; padding: 1rem; border: 2px solid rgba(232, 222, 210, 0.3); background: rgba(255, 255, 255, 0.05); color: var(--color-white); font-size: 1rem; font-family: var(--font-body);">
+                                <option value="">Select a destination</option>
+                                <option value="Bandon Dunes">Bandon Dunes</option>
+                                <option value="Scotland">Scotland</option>
+                                <option value="Ireland">Ireland</option>
+                                <option value="Pinehurst">Pinehurst</option>
+                                <option value="Other">Other / Not Sure Yet</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="groupSize">Group Size</label>
+                            <input type="text" id="groupSize" name="groupSize" placeholder="e.g., 4 golfers" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="targetDates">Target Dates</label>
+                            <input type="text" id="targetDates" name="targetDates" placeholder="e.g., May 2025 or Spring 2025" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="notes">Additional Details (Optional)</label>
+                            <textarea id="notes" name="notes" rows="4" placeholder="Any specific requirements, preferences, or questions?" style="width: 100%; padding: 1rem; border: 2px solid rgba(232, 222, 210, 0.3); background: rgba(255, 255, 255, 0.05); color: var(--color-white); font-size: 1rem; font-family: var(--font-body); resize: vertical;"></textarea>
+                        </div>
+                        <button type="submit" class="btn-primary">Submit Trip Request</button>
+                        <div class="form-message" id="formMessage"></div>
+                    </form>
+                </section>
+            </div>
+        </article>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2025 Nine Before 9 Trips. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/form-handler.js"></script>
+</body>
+</html>
