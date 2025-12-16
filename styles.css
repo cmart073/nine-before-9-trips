@@ -129,30 +129,25 @@ a:hover {
 }
 
 .logo {
-    font-family: var(--font-display);
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--color-fairway);
-    letter-spacing: -0.03em;
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
+    display: block;
+    transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
-.logo img {
-    height: 40px;
+.logo-img {
+    height: 45px;
     width: auto;
-    transition: transform 0.3s ease;
+    display: block;
 }
 
 .logo:hover {
-    color: var(--color-sand);
+    opacity: 0.8;
     transform: translateY(-1px);
 }
 
-.logo:hover img {
-    transform: scale(1.05);
+@media (max-width: 768px) {
+    .logo-img {
+        height: 35px;
+    }
 }
 
 .main-nav {
