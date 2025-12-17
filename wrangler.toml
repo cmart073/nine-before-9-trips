@@ -12,7 +12,7 @@ pages_build_output_dir = "."
 
 [[kv_namespaces]]
 binding = "LEADS"
-id = "640647fae021436b95b5f4339cecea17"
+id = "YOUR_KV_NAMESPACE_ID"
 
 # Environment variables (optional)
 # [vars]
