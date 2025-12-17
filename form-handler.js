@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', function() {
             
         } catch (error) {
             // Error handling
-            formMessage.textContent = 'Sorry, something went wrong. Please email directly at cmart073@gmail.com';
+            formMessage.textContent = 'Sorry, something went wrong. Please try again later.';
             formMessage.className = 'form-message error';
         } finally {
             // Re-enable button
