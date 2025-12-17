@@ -3,13 +3,6 @@ compatibility_date = "2025-01-01"
 pages_build_output_dir = "."
 
 # KV Namespace for lead storage
-# After uploading, create the KV namespace in Cloudflare dashboard:
-# 1. Go to Workers & Pages > KV
-# 2. Create namespace named: nine-before-9-leads
-# 3. Copy the namespace ID
-# 4. Replace YOUR_KV_NAMESPACE_ID below with the actual ID
-# 5. Re-upload the wrangler.toml file
-
 [[kv_namespaces]]
 binding = "LEADS"
 id = "640647fae021436b95b5f4339cecea17"
