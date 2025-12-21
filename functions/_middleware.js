@@ -18,29 +18,29 @@ function handleAffiliateRedirect(pathname) {
   // Map of affiliate redirect destinations
   const affiliateMap = {
     // Bandon Dunes
-    '/go/bandon-hotels': 'https://www.booking.com/searchresults.html?ss=Bandon+Dunes+Golf+Resort',
-    '/go/bandon-flights': 'https://www.google.com/flights?q=flights+to+north+bend+oregon',
-    '/go/bandon-car': 'https://www.rentalcars.com/SearchResults.do?city=North+Bend+Oregon',
+    '/go/bandon-hotels': 'https://www.awin1.com/cread.php?awinmid=6776&awinaffid=2697060',
+    '/go/bandon-flights': 'https://www.awin1.com/cread.php?awinmid=6776&awinaffid=2697060&campaign=flights&ued=https%3A%2F%2Fwww.booking.com%2Fflights%2Findex.html',
+    '/go/bandon-car': 'https://www.awin1.com/cread.php?awinmid=6776&awinaffid=2697060&campaign=CarRentals&ued=https%3A%2F%2Fwww.booking.com%2Fcars%2Findex.html',
     
     // Scottsdale
-    '/go/scottsdale-hotels': 'https://www.booking.com/searchresults.html?ss=Scottsdale+Arizona',
-    '/go/scottsdale-flights': 'https://www.google.com/flights?q=flights+to+phoenix',
-    '/go/scottsdale-car': 'https://www.rentalcars.com/SearchResults.do?city=Phoenix+Arizona',
+    '/go/scottsdale-hotels': 'https://www.awin1.com/cread.php?awinmid=6776&awinaffid=2697060',
+    '/go/scottsdale-flights': 'https://www.awin1.com/cread.php?awinmid=6776&awinaffid=2697060&campaign=flights&ued=https%3A%2F%2Fwww.booking.com%2Fflights%2Findex.html',
+    '/go/scottsdale-car': 'https://www.awin1.com/cread.php?awinmid=6776&awinaffid=2697060&campaign=CarRentals&ued=https%3A%2F%2Fwww.booking.com%2Fcars%2Findex.html',
     
     // Las Vegas
-    '/go/vegas-hotels': 'https://www.booking.com/searchresults.html?ss=Las+Vegas+Nevada',
-    '/go/vegas-flights': 'https://www.google.com/flights?q=flights+to+las+vegas',
-    '/go/vegas-car': 'https://www.rentalcars.com/SearchResults.do?city=Las+Vegas+Nevada',
+    '/go/vegas-hotels': 'https://www.awin1.com/cread.php?awinmid=6776&awinaffid=2697060',
+    '/go/vegas-flights': 'https://www.awin1.com/cread.php?awinmid=6776&awinaffid=2697060&campaign=flights&ued=https%3A%2F%2Fwww.booking.com%2Fflights%2Findex.html',
+    '/go/vegas-car': 'https://www.awin1.com/cread.php?awinmid=6776&awinaffid=2697060&campaign=CarRentals&ued=https%3A%2F%2Fwww.booking.com%2Fcars%2Findex.html',
     
     // Palm Springs
-    '/go/palmsprings-hotels': 'https://www.booking.com/searchresults.html?ss=Palm+Springs+California',
-    '/go/palmsprings-flights': 'https://www.google.com/flights?q=flights+to+palm+springs',
-    '/go/palmsprings-car': 'https://www.rentalcars.com/SearchResults.do?city=Palm+Springs+California',
+    '/go/palmsprings-hotels': 'https://www.awin1.com/cread.php?awinmid=6776&awinaffid=2697060',
+    '/go/palmsprings-flights': 'https://www.awin1.com/cread.php?awinmid=6776&awinaffid=2697060&campaign=flights&ued=https%3A%2F%2Fwww.booking.com%2Fflights%2Findex.html',
+    '/go/palmsprings-car': 'https://www.awin1.com/cread.php?awinmid=6776&awinaffid=2697060&campaign=CarRentals&ued=https%3A%2F%2Fwww.booking.com%2Fcars%2Findex.html',
     
     // San Diego
-    '/go/sandiego-hotels': 'https://www.booking.com/searchresults.html?ss=Carlsbad+California',
-    '/go/sandiego-flights': 'https://www.google.com/flights?q=flights+to+san+diego',
-    '/go/sandiego-car': 'https://www.rentalcars.com/SearchResults.do?city=San+Diego+California',
+    '/go/sandiego-hotels': 'https://www.awin1.com/cread.php?awinmid=6776&awinaffid=2697060',
+    '/go/sandiego-flights': 'https://www.awin1.com/cread.php?awinmid=6776&awinaffid=2697060&campaign=flights&ued=https%3A%2F%2Fwww.booking.com%2Fflights%2Findex.html',
+    '/go/sandiego-car': 'https://www.awin1.com/cread.php?awinmid=6776&awinaffid=2697060&campaign=CarRentals&ued=https%3A%2F%2Fwww.booking.com%2Fcars%2Findex.html',
   };
 
   const destination = affiliateMap[pathname];
