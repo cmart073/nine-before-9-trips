@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Golf Registrations - Admin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;600;700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Source Sans 3', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #faf7f2;
+      color: #2a2520;
+      line-height: 1.6;
+      padding: 2rem;
+    }
+    
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    
+    h1 {
+      font-family: 'Merriweather', serif;
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+      color: #1a4d2e;
+    }
+    
+    .subtitle {
+      color: #5a5550;
+      margin-bottom: 2rem;
+    }
+    
+    .stats {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+    
+    .stat-card {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 4px;
+      border-left: 4px solid #c7a962;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      min-width: 200px;
+    }
+    
+    .stat-card .number {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #1a4d2e;
+      font-family: 'Merriweather', serif;
+    }
+    
+    .stat-card .label {
+      font-size: 0.875rem;
+      color: #5a5550;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    
+    .loading {
+      text-align: center;
+      padding: 3rem;
+      color: #5a5550;
+    }
+    
+    .registrations {
+      display: grid;
+      gap: 1.5rem;
+    }
+    
+    .registration-card {
+      background: white;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      border-radius: 4px;
+      padding: 2rem;
+      transition: all 0.2s ease;
+    }
+    
+    .registration-card:hover {
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      border-color: rgba(0, 0, 0, 0.15);
+    }
+    
+    .registration-card.unread {
+      border-left: 4px solid #c7a962;
+    }
+    
+    .registration-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: start;
+      margin-bottom: 1.5rem;
+      gap: 1rem;
+    }
+    
+    .registration-name {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #1a4d2e;
+      font-family: 'Merriweather', serif;
+    }
+    
+    .registration-date {
+      font-size: 0.875rem;
+      color: #5a5550;
+    }
+    
+    .badge {
+      display: inline-block;
+      padding: 0.25rem 0.75rem;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      border-radius: 3px;
+    }
+    
+    .badge.new {
+      background: #fff3e0;
+      color: #e65100;
+    }
+    
+    .badge.foursome {
+      background: #e8f5e9;
+      color: #2e7d32;
+    }
+    
+    .badge.individual {
+      background: #e3f2fd;
+      color: #1565c0;
+    }
+    
+    .registration-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+    
+    .field-label {
+      font-size: 0.875rem;
+      font-weight: 700;
+      color: #5a5550;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    
+    .field-value {
+      color: #2a2520;
+    }
+    
+    .team-section {
+      margin-top: 1.5rem;
+      padding: 1.5rem;
+      background: #faf7f2;
+      border-radius: 4px;
+    }
+    
+    .team-section h4 {
+      font-family: 'Merriweather', serif;
+      color: #1a4d2e;
+      margin-bottom: 1rem;
+    }
+    
+    .team-members {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+    }
+    
+    .no-registrations {
+      text-align: center;
+      padding: 4rem 2rem;
+      color: #5a5550;
+    }
+    
+    .no-registrations h2 {
+      font-family: 'Merriweather', serif;
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+      color: #2a2520;
+    }
+    
+    .error {
+      background: #ffebee;
+      border: 1px solid #ef5350;
+      color: #c62828;
+      padding: 1rem;
+      border-radius: 4px;
+      margin-bottom: 2rem;
+    }
+    
+    @media (max-width: 768px) {
+      body {
+        padding: 1rem;
+      }
+      
+      h1 {
+        font-size: 2rem;
+      }
+      
+      .stats {
+        flex-direction: column;
+      }
+      
+      .registration-header {
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+      
+      .registration-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .team-members {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Golf Registrations</h1>
+    <p class="subtitle">Jeff Martin Memorial Golf Outing registrations</p>
+    
+    <div class="stats">
+      <div class="stat-card">
+        <div class="number" id="total-count">-</div>
+        <div class="label">Total Registrations</div>
+      </div>
+      <div class="stat-card">
+        <div class="number" id="foursome-count">-</div>
+        <div class="label">Full Foursomes</div>
+      </div>
+      <div class="stat-card">
+        <div class="number" id="individual-count">-</div>
+        <div class="label">Individuals</div>
+      </div>
+      <div class="stat-card">
+        <div class="number" id="total-players">-</div>
+        <div class="label">Total Players</div>
+      </div>
+    </div>
+    
+    <div id="error-message" class="error" style="display: none;"></div>
+    <div id="loading" class="loading">Loading registrations...</div>
+    <div id="registrations" class="registrations"></div>
+  </div>
+  
+  <script>
+    async function loadRegistrations() {
+      try {
+        const response = await fetch('/api/golf-registrations');
+        
+        if (!response.ok) {
+          throw new Error('Failed to load registrations');
+        }
+        
+        const registrations = await response.json();
+        
+        document.getElementById('loading').style.display = 'none';
+        
+        if (registrations.length === 0) {
+          document.getElementById('registrations').innerHTML = `
+            <div class="no-registrations">
+              <h2>No registrations yet</h2>
+              <p>Golf tournament registrations will appear here when people sign up.</p>
+            </div>
+          `;
+          document.getElementById('total-count').textContent = '0';
+          document.getElementById('foursome-count').textContent = '0';
+          document.getElementById('individual-count').textContent = '0';
+          document.getElementById('total-players').textContent = '0';
+          return;
+        }
+        
+        // Calculate stats
+        const foursomeCount = registrations.filter(r => r.fullFoursome === 'yes').length;
+        const individualCount = registrations.filter(r => r.fullFoursome === 'no').length;
+        const totalPlayers = (foursomeCount * 4) + individualCount;
+        
+        document.getElementById('total-count').textContent = registrations.length;
+        document.getElementById('foursome-count').textContent = foursomeCount;
+        document.getElementById('individual-count').textContent = individualCount;
+        document.getElementById('total-players').textContent = totalPlayers;
+        
+        // Render registrations
+        const registrationsHtml = registrations.map(reg => {
+          const date = new Date(reg.timestamp);
+          const dateStr = date.toLocaleDateString('en-US', { 
+            year: 'numeric', 
+            month: 'long', 
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit'
+          });
+          
+          const isFoursome = reg.fullFoursome === 'yes';
+          
+          return `
+            <div class="registration-card ${!reg.read ? 'unread' : ''}">
+              <div class="registration-header">
+                <div>
+                  <div class="registration-name">${escapeHtml(reg.name)}</div>
+                  <div class="registration-date">${dateStr}</div>
+                </div>
+                <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                  ${!reg.read ? '<span class="badge new">New</span>' : ''}
+                  <span class="badge ${isFoursome ? 'foursome' : 'individual'}">
+                    ${isFoursome ? 'Full Foursome' : 'Individual'}
+                  </span>
+                </div>
+              </div>
+              
+              <div class="registration-grid">
+                <div class="field">
+                  <div class="field-label">Email</div>
+                  <div class="field-value">${escapeHtml(reg.email)}</div>
+                </div>
+                
+                <div class="field">
+                  <div class="field-label">Phone</div>
+                  <div class="field-value">${escapeHtml(reg.phone)}</div>
+                </div>
+                
+                <div class="field">
+                  <div class="field-label">Handicap/Level</div>
+                  <div class="field-value">${escapeHtml(reg.handicap)}</div>
+                </div>
+              </div>
+              
+              ${isFoursome ? `
+                <div class="team-section">
+                  <h4>Team Members</h4>
+                  <div class="team-members">
+                    ${reg.player1 ? `<div class="field">
+                      <div class="field-label">Player 1</div>
+                      <div class="field-value">${escapeHtml(reg.player1)}</div>
+                    </div>` : ''}
+                    ${reg.player2 ? `<div class="field">
+                      <div class="field-label">Player 2</div>
+                      <div class="field-value">${escapeHtml(reg.player2)}</div>
+                    </div>` : ''}
+                    ${reg.player3 ? `<div class="field">
+                      <div class="field-label">Player 3</div>
+                      <div class="field-value">${escapeHtml(reg.player3)}</div>
+                    </div>` : ''}
+                    ${reg.player4 ? `<div class="field">
+                      <div class="field-label">Player 4</div>
+                      <div class="field-value">${escapeHtml(reg.player4)}</div>
+                    </div>` : ''}
+                  </div>
+                </div>
+              ` : reg.pairingNotes ? `
+                <div class="team-section">
+                  <h4>Pairing Preferences</h4>
+                  <div class="field-value">${escapeHtml(reg.pairingNotes)}</div>
+                </div>
+              ` : ''}
+              
+              ${reg.notes ? `
+                <div class="team-section">
+                  <h4>Additional Notes</h4>
+                  <div class="field-value">${escapeHtml(reg.notes)}</div>
+                </div>
+              ` : ''}
+            </div>
+          `;
+        }).join('');
+        
+        document.getElementById('registrations').innerHTML = registrationsHtml;
+        
+      } catch (error) {
+        document.getElementById('loading').style.display = 'none';
+        document.getElementById('error-message').textContent = 
+          'Error loading registrations: ' + error.message;
+        document.getElementById('error-message').style.display = 'block';
+      }
+    }
+    
+    function escapeHtml(text) {
+      if (!text) return '';
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
+    
+    // Load on page load
+    loadRegistrations();
+    
+    // Auto-refresh every 30 seconds
+    setInterval(loadRegistrations, 30000);
+  </script>
+</body>
+</html>

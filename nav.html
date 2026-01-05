@@ -1,0 +1,73 @@
+<!-- Navigation Component -->
+<nav class="site-nav">
+  <div class="nav-container">
+    <a href="/" class="nav-logo">CM</a>
+    <div class="nav-links">
+      <a href="/weddings.html">Weddings</a>
+      <a href="/martin-memorial-golf-outing.html">Golf Outing</a>
+      <!-- Add more links as you build pages -->
+    </div>
+  </div>
+</nav>
+
+<style>
+  .site-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: rgba(250, 248, 245, 0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(50, 45, 40, 0.08);
+    z-index: 1000;
+  }
+  
+  .nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1.5rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .nav-logo {
+    font-family: 'Crimson Pro', serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #2a2520;
+    text-decoration: none;
+    letter-spacing: -0.02em;
+  }
+  
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+  }
+  
+  .nav-links a {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 0.95rem;
+    color: #4a4540;
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+  
+  .nav-links a:hover {
+    color: #2a2520;
+  }
+  
+  @media (max-width: 640px) {
+    .nav-container {
+      padding: 1.25rem 1.5rem;
+    }
+    
+    .nav-links {
+      gap: 1.5rem;
+    }
+    
+    .nav-links a {
+      font-size: 0.9rem;
+    }
+  }
+</style>

@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register — Jeff Martin Memorial Golf Outing</title>
+  <meta name="description" content="Register your team for the Jeff Martin Memorial Golf Outing. Submit your foursome details and handicap levels.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700;900&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --forest: #1a4d2e;
+      --forest-light: #2d6a47;
+      --gold: #c7a962;
+      --cream: #faf7f2;
+      --text: #2a2520;
+      --text-soft: #5a5550;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Source Sans 3', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--cream);
+      color: var(--text);
+      line-height: 1.7;
+      font-size: 17px;
+    }
+    
+    /* Hero */
+    .hero {
+      background: var(--forest);
+      color: white;
+      padding: 4rem 2rem;
+      text-align: center;
+    }
+    
+    .crest {
+      width: 80px;
+      height: auto;
+      margin-bottom: 1.5rem;
+      opacity: 0.95;
+    }
+    
+    .hero h1 {
+      font-family: 'Merriweather', serif;
+      font-size: 2.75rem;
+      font-weight: 900;
+      margin-bottom: 1rem;
+    }
+    
+    .hero .subhead {
+      font-size: 1.125rem;
+      color: rgba(255, 255, 255, 0.9);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    
+    /* Form Container */
+    .form-container {
+      max-width: 700px;
+      margin: -2rem auto 4rem;
+      background: white;
+      padding: 3rem;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+      position: relative;
+      z-index: 10;
+    }
+    
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+    
+    .form-section {
+      border-top: 2px solid var(--cream);
+      padding-top: 2rem;
+    }
+    
+    .form-section:first-child {
+      border-top: none;
+      padding-top: 0;
+    }
+    
+    .form-section-title {
+      font-family: 'Merriweather', serif;
+      font-size: 1.5rem;
+      color: var(--forest);
+      margin-bottom: 1.5rem;
+      font-weight: 700;
+    }
+    
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    
+    label {
+      font-weight: 600;
+      color: var(--text);
+      font-size: 0.95rem;
+    }
+    
+    label .required {
+      color: var(--gold);
+      margin-left: 0.25rem;
+    }
+    
+    input, textarea, select {
+      padding: 0.875rem 1rem;
+      border: 2px solid #e0e0e0;
+      background: white;
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 1rem;
+      color: var(--text);
+      border-radius: 4px;
+      transition: border-color 0.2s ease;
+    }
+    
+    input:focus, textarea:focus, select:focus {
+      outline: none;
+      border-color: var(--gold);
+    }
+    
+    textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+    
+    .radio-group {
+      display: flex;
+      gap: 2rem;
+      margin-top: 0.5rem;
+    }
+    
+    .radio-option {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .radio-option input[type="radio"] {
+      width: auto;
+      margin: 0;
+    }
+    
+    .conditional-section {
+      margin-top: 1.5rem;
+      padding: 1.5rem;
+      background: var(--cream);
+      border-radius: 4px;
+      display: none;
+    }
+    
+    .conditional-section.active {
+      display: block;
+    }
+    
+    .team-members {
+      display: grid;
+      gap: 1rem;
+    }
+    
+    button[type="submit"] {
+      padding: 1rem 2.5rem;
+      background: var(--forest);
+      color: white;
+      border: none;
+      font-family: 'Source Sans 3', sans-serif;
+      font-weight: 700;
+      font-size: 1.125rem;
+      cursor: pointer;
+      border-radius: 4px;
+      transition: all 0.2s ease;
+      margin-top: 1rem;
+    }
+    
+    button[type="submit"]:hover {
+      background: var(--forest-light);
+    }
+    
+    .success-message {
+      display: none;
+      padding: 2rem;
+      background: #e8f5e9;
+      border-left: 4px solid #4caf50;
+      border-radius: 4px;
+      margin-bottom: 2rem;
+      color: #2e7d32;
+    }
+    
+    .success-message h3 {
+      font-family: 'Merriweather', serif;
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+      color: #2e7d32;
+    }
+    
+    /* Footer */
+    .footer {
+      background: var(--text);
+      color: rgba(255, 255, 255, 0.7);
+      padding: 2rem;
+      text-align: center;
+      font-size: 0.9rem;
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero {
+        padding: 3rem 1.5rem;
+      }
+      
+      .hero h1 {
+        font-size: 2rem;
+      }
+      
+      .form-container {
+        margin: -1.5rem 1.5rem 3rem;
+        padding: 2rem 1.5rem;
+      }
+      
+      .radio-group {
+        flex-direction: column;
+        gap: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="nav-container"></div>
+  
+  <!-- Hero -->
+  <section class="hero">
+    <img src="https://imagedelivery.net/rZkT_T3wxwwF-qdjkGLRCQ/d7a109c3-bcf8-48d9-9b5c-d868cf65a800/public" alt="Martin Family Crest" class="crest">
+    <h1>Register your team</h1>
+    <p class="subhead">Share your details below. If you don't have a foursome, register anyway — we'll pair groups up.</p>
+  </section>
+  
+  <!-- Form Container -->
+  <div class="form-container">
+    <div id="success-message" class="success-message">
+      <h3>You're registered!</h3>
+      <p>We'll confirm details and share the final date/location once it's locked.</p>
+    </div>
+    
+    <form id="registration-form" action="/golf-registration" method="POST">
+      <!-- Contact Section -->
+      <div class="form-section">
+        <h2 class="form-section-title">Contact</h2>
+        
+        <div class="form-group">
+          <label for="name">Full name <span class="required">*</span></label>
+          <input type="text" id="name" name="name" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="email">Email <span class="required">*</span></label>
+          <input type="email" id="email" name="email" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="phone">Phone <span class="required">*</span></label>
+          <input type="tel" id="phone" name="phone" required>
+        </div>
+      </div>
+      
+      <!-- Team Section -->
+      <div class="form-section">
+        <h2 class="form-section-title">Team</h2>
+        
+        <div class="form-group">
+          <label>Are you registering a full foursome? <span class="required">*</span></label>
+          <div class="radio-group">
+            <div class="radio-option">
+              <input type="radio" id="foursome-yes" name="full-foursome" value="yes" required>
+              <label for="foursome-yes" style="font-weight: normal; margin: 0;">Yes</label>
+            </div>
+            <div class="radio-option">
+              <input type="radio" id="foursome-no" name="full-foursome" value="no" required>
+              <label for="foursome-no" style="font-weight: normal; margin: 0;">No</label>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Conditional: Full Foursome -->
+        <div id="team-members-section" class="conditional-section">
+          <div class="team-members">
+            <div class="form-group">
+              <label for="player1">Player 1 name <span class="required">*</span></label>
+              <input type="text" id="player1" name="player1">
+            </div>
+            <div class="form-group">
+              <label for="player2">Player 2 name <span class="required">*</span></label>
+              <input type="text" id="player2" name="player2">
+            </div>
+            <div class="form-group">
+              <label for="player3">Player 3 name <span class="required">*</span></label>
+              <input type="text" id="player3" name="player3">
+            </div>
+            <div class="form-group">
+              <label for="player4">Player 4 name <span class="required">*</span></label>
+              <input type="text" id="player4" name="player4">
+            </div>
+          </div>
+        </div>
+        
+        <!-- Conditional: Individual -->
+        <div id="pairing-section" class="conditional-section">
+          <div class="form-group">
+            <label for="pairing-notes">Preferred pairing notes (optional)</label>
+            <textarea id="pairing-notes" name="pairing-notes" placeholder="e.g., 'Would like to be paired with beginner golfers' or 'Happy to play with anyone'"></textarea>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Golf Level Section -->
+      <div class="form-section">
+        <h2 class="form-section-title">Golf level</h2>
+        
+        <div class="form-group">
+          <label for="handicap">Current golf level or handicap <span class="required">*</span></label>
+          <input type="text" id="handicap" name="handicap" placeholder="e.g., '12' or 'Beginner' or 'Competitive'" required>
+        </div>
+      </div>
+      
+      <!-- Optional Section -->
+      <div class="form-section">
+        <h2 class="form-section-title">Optional</h2>
+        
+        <div class="form-group">
+          <label for="notes">Notes / requests (optional)</label>
+          <textarea id="notes" name="notes" placeholder="Any dietary restrictions, special requests, or other notes"></textarea>
+        </div>
+      </div>
+      
+      <button type="submit">Submit registration</button>
+    </form>
+  </div>
+  
+  <!-- Footer -->
+  <footer class="footer">
+    Powered and built by NineBefore9
+  </footer>
+  
+  <script>
+    // Load navigation
+    fetch('/nav.html')
+      .then(response => response.text())
+      .then(html => {
+        document.getElementById('nav-container').innerHTML = html;
+      });
+    
+    // Handle conditional sections
+    const foursomeYes = document.getElementById('foursome-yes');
+    const foursomeNo = document.getElementById('foursome-no');
+    const teamMembersSection = document.getElementById('team-members-section');
+    const pairingSection = document.getElementById('pairing-section');
+    const playerInputs = [
+      document.getElementById('player1'),
+      document.getElementById('player2'),
+      document.getElementById('player3'),
+      document.getElementById('player4')
+    ];
+    
+    function updateConditionalSections() {
+      if (foursomeYes.checked) {
+        teamMembersSection.classList.add('active');
+        pairingSection.classList.remove('active');
+        playerInputs.forEach(input => input.required = true);
+      } else if (foursomeNo.checked) {
+        teamMembersSection.classList.remove('active');
+        pairingSection.classList.add('active');
+        playerInputs.forEach(input => input.required = false);
+      }
+    }
+    
+    foursomeYes.addEventListener('change', updateConditionalSections);
+    foursomeNo.addEventListener('change', updateConditionalSections);
+    
+    // Handle success message
+    if (window.location.search.includes('success=true')) {
+      document.getElementById('success-message').style.display = 'block';
+      document.getElementById('registration-form').style.display = 'none';
+      setTimeout(() => {
+        document.getElementById('success-message').scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 100);
+    }
+  </script>
+</body>
+</html>

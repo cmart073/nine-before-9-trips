@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jeff Martin Memorial Golf Outing</title>
+  <meta name="description" content="An annual 4-person scramble honoring Jeff Martin. Family, friends, and a day on the course—played with heart, good stories, and a few house rules.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700;900&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --forest: #1a4d2e;
+      --forest-light: #2d6a47;
+      --gold: #c7a962;
+      --cream: #faf7f2;
+      --text: #2a2520;
+      --text-soft: #5a5550;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Source Sans 3', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--cream);
+      color: var(--text);
+      line-height: 1.7;
+      font-size: 17px;
+    }
+    
+    /* Hero Section */
+    .hero {
+      background: var(--forest);
+      color: white;
+      padding: 6rem 2rem 8rem;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('https://imagedelivery.net/rZkT_T3wxwwF-qdjkGLRCQ/5e59c11f-69e1-4fe3-f9e0-e2de5a3dc600/public') center/cover;
+      opacity: 0.08;
+      mix-blend-mode: overlay;
+    }
+    
+    .hero-content {
+      max-width: 900px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+      text-align: center;
+    }
+    
+    .crest {
+      width: 120px;
+      height: auto;
+      margin-bottom: 2rem;
+      opacity: 0.95;
+    }
+    
+    .hero h1 {
+      font-family: 'Merriweather', serif;
+      font-size: 3.5rem;
+      font-weight: 900;
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+      letter-spacing: -0.02em;
+    }
+    
+    .hero .subhead {
+      font-size: 1.25rem;
+      line-height: 1.6;
+      color: rgba(255, 255, 255, 0.9);
+      margin-bottom: 2.5rem;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    .hero-ctas {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    
+    .cta-primary {
+      display: inline-block;
+      padding: 1rem 2.5rem;
+      background: var(--gold);
+      color: var(--forest);
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 1rem;
+      border-radius: 4px;
+      transition: all 0.2s ease;
+      border: 2px solid var(--gold);
+    }
+    
+    .cta-primary:hover {
+      background: transparent;
+      color: var(--gold);
+    }
+    
+    .cta-secondary {
+      display: inline-block;
+      padding: 1rem 2.5rem;
+      background: transparent;
+      color: white;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 1rem;
+      border-radius: 4px;
+      transition: all 0.2s ease;
+      border: 2px solid rgba(255, 255, 255, 0.4);
+    }
+    
+    .cta-secondary:hover {
+      border-color: white;
+      background: rgba(255, 255, 255, 0.1);
+    }
+    
+    /* Content Sections */
+    .content {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 5rem 2rem;
+    }
+    
+    section {
+      margin-bottom: 5rem;
+    }
+    
+    .section-divider {
+      height: 60px;
+      background: url('https://imagedelivery.net/rZkT_T3wxwwF-qdjkGLRCQ/5e59c11f-69e1-4fe3-f9e0-e2de5a3dc600/public') center/cover;
+      opacity: 0.15;
+      margin: 4rem 0;
+    }
+    
+    h2 {
+      font-family: 'Merriweather', serif;
+      font-size: 2.25rem;
+      font-weight: 700;
+      color: var(--forest);
+      margin-bottom: 1.5rem;
+      letter-spacing: -0.01em;
+    }
+    
+    p {
+      margin-bottom: 1.25rem;
+      color: var(--text-soft);
+    }
+    
+    /* Date & Location */
+    .info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    
+    .info-card {
+      background: white;
+      padding: 2rem;
+      border-left: 4px solid var(--gold);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
+    
+    .info-card h3 {
+      font-family: 'Merriweather', serif;
+      font-size: 1.125rem;
+      color: var(--forest);
+      margin-bottom: 0.5rem;
+      font-weight: 700;
+    }
+    
+    .info-card .value {
+      font-size: 1.125rem;
+      color: var(--text);
+      font-weight: 600;
+    }
+    
+    .callout {
+      margin-top: 2rem;
+      padding: 1.25rem;
+      background: #fef9e7;
+      border-left: 4px solid var(--gold);
+      font-style: italic;
+      color: var(--text-soft);
+    }
+    
+    /* Schedule */
+    .schedule-list {
+      margin-top: 2rem;
+    }
+    
+    .schedule-item {
+      display: flex;
+      gap: 2rem;
+      padding: 1.5rem 0;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    }
+    
+    .schedule-item:last-child {
+      border-bottom: none;
+    }
+    
+    .schedule-time {
+      font-family: 'Merriweather', serif;
+      font-size: 1.125rem;
+      font-weight: 700;
+      color: var(--forest);
+      min-width: 100px;
+    }
+    
+    .schedule-desc {
+      flex: 1;
+      color: var(--text-soft);
+    }
+    
+    .schedule-note {
+      margin-top: 2rem;
+      font-size: 0.95rem;
+      color: var(--text-soft);
+      font-style: italic;
+    }
+    
+    /* Format & Rules */
+    .rules-grid {
+      display: grid;
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    
+    .rule-card {
+      background: white;
+      padding: 2rem;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      border-top: 4px solid var(--forest);
+    }
+    
+    .rule-card h3 {
+      font-family: 'Merriweather', serif;
+      font-size: 1.5rem;
+      color: var(--forest);
+      margin-bottom: 1rem;
+      font-weight: 700;
+    }
+    
+    .rule-card h4 {
+      font-weight: 700;
+      color: var(--forest);
+      margin-top: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+    
+    .rule-card ul {
+      list-style: none;
+      padding: 0;
+    }
+    
+    .rule-card li {
+      padding: 0.5rem 0;
+      padding-left: 1.5rem;
+      position: relative;
+      color: var(--text-soft);
+    }
+    
+    .rule-card li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      color: var(--gold);
+      font-weight: bold;
+    }
+    
+    .scoring-table {
+      margin-top: 1rem;
+      width: 100%;
+      border-collapse: collapse;
+    }
+    
+    .scoring-table td {
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    }
+    
+    .scoring-table td:first-child {
+      font-weight: 600;
+      color: var(--forest);
+    }
+    
+    /* Register CTA Section */
+    .register-section {
+      background: var(--forest);
+      color: white;
+      padding: 4rem 2rem;
+      margin: 5rem -2rem 0;
+      text-align: center;
+    }
+    
+    .register-section h2 {
+      color: white;
+      margin-bottom: 1rem;
+    }
+    
+    .register-section p {
+      color: rgba(255, 255, 255, 0.9);
+      margin-bottom: 2rem;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    /* Footer */
+    .footer {
+      background: var(--text);
+      color: rgba(255, 255, 255, 0.7);
+      padding: 2rem;
+      text-align: center;
+      font-size: 0.9rem;
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero {
+        padding: 4rem 1.5rem 6rem;
+      }
+      
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+      
+      .hero .subhead {
+        font-size: 1.125rem;
+      }
+      
+      .hero-ctas {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      
+      .content {
+        padding: 3rem 1.5rem;
+      }
+      
+      h2 {
+        font-size: 1.875rem;
+      }
+      
+      .info-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .schedule-item {
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+      
+      .register-section {
+        margin-left: -1.5rem;
+        margin-right: -1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="nav-container"></div>
+  
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-content">
+      <img src="https://imagedelivery.net/rZkT_T3wxwwF-qdjkGLRCQ/d7a109c3-bcf8-48d9-9b5c-d868cf65a800/public" alt="Martin Family Crest" class="crest">
+      <h1>Jeff Martin Memorial Golf Outing</h1>
+      <p class="subhead">A yearly gathering to remember Jeff — and spend a day doing what he loved: being with his people, outdoors, and competing just enough to laugh about it later.</p>
+      <div class="hero-ctas">
+        <a href="/martin-memorial-golf-outing/register.html" class="cta-primary">Register your team</a>
+        <a href="#format" class="cta-secondary">View format & rules</a>
+      </div>
+    </div>
+  </section>
+  
+  <div class="content">
+    <!-- About -->
+    <section class="about">
+      <h2>About the outing</h2>
+      <p>This outing is our way of keeping Jeff's name, stories, and spirit in the middle of the family calendar every year.</p>
+      <p>It's competitive, but not serious. The goal is simple: show up, play hard enough to care, and spend the day together. We'll run a 4-person scramble with Modified Stableford scoring, plus a few house rules that make it fun for every skill level.</p>
+      <p>If you knew Jeff, you already know why we do this. If you didn't, you'll feel it by the end of the day.</p>
+    </section>
+    
+    <div class="section-divider"></div>
+    
+    <!-- Date & Location -->
+    <section class="date-location">
+      <h2>Date & location</h2>
+      <p>We aim to hold the outing around Jeff's birthday — April 26 — or the weekend before/after.</p>
+      
+      <div class="info-grid">
+        <div class="info-card">
+          <h3>Event date</h3>
+          <div class="value">Date to be announced<br>(April 26 weekend)</div>
+        </div>
+        <div class="info-card">
+          <h3>Location</h3>
+          <div class="value">Course details to be announced</div>
+        </div>
+      </div>
+      
+      <div class="callout">
+        Once the date is locked, it will be posted here and emailed to registered players.
+      </div>
+    </section>
+    
+    <div class="section-divider"></div>
+    
+    <!-- Schedule -->
+    <section class="schedule">
+      <h2>Schedule</h2>
+      <div class="schedule-list">
+        <div class="schedule-item">
+          <div class="schedule-time">9:00 AM</div>
+          <div class="schedule-desc">Check-in + breakfast</div>
+        </div>
+        <div class="schedule-item">
+          <div class="schedule-time">10:00 AM</div>
+          <div class="schedule-desc">Shotgun start / Tee off</div>
+        </div>
+        <div class="schedule-item">
+          <div class="schedule-time">1:00 PM</div>
+          <div class="schedule-desc">Lunch (turn time / clubhouse)</div>
+        </div>
+        <div class="schedule-item">
+          <div class="schedule-time">3:00 PM</div>
+          <div class="schedule-desc">Awards + wrap-up</div>
+        </div>
+      </div>
+      <p class="schedule-note">Timing may shift slightly based on course rules and tee sheet.</p>
+    </section>
+    
+    <div class="section-divider"></div>
+    
+    <!-- Format & Rules -->
+    <section class="format" id="format">
+      <h2>Format & rules</h2>
+      
+      <div class="rules-grid">
+        <div class="rule-card">
+          <h3>Format</h3>
+          <p><strong>Format:</strong> 4-person scramble</p>
+          <p><strong>Scoring:</strong> Modified Stableford</p>
+          
+          <h4>Modified Stableford scoring</h4>
+          <table class="scoring-table">
+            <tr><td>+2 or more</td><td>0 pts</td></tr>
+            <tr><td>+1</td><td>1 pt</td></tr>
+            <tr><td>Par</td><td>2 pts</td></tr>
+            <tr><td>-1 (Birdie)</td><td>3 pts</td></tr>
+            <tr><td>-2 (Eagle)</td><td>4 pts</td></tr>
+            <tr><td>-3</td><td>5 pts</td></tr>
+            <tr><td>-4</td><td>6 pts</td></tr>
+          </table>
+        </div>
+        
+        <div class="rule-card">
+          <h3>Mulligans</h3>
+          <p>2 mulligans per person per 6 holes</p>
+        </div>
+        
+        <div class="rule-card">
+          <h3>Bonus rules</h3>
+          
+          <h4>Make Your Own</h4>
+          <p>(one player holes out their own ball for the team)</p>
+          <ul>
+            <li>Par: 3 pts</li>
+            <li>Birdie: 4 pts</li>
+            <li>Eagle: 5 pts</li>
+          </ul>
+          
+          <h4>Riders</h4>
+          <p>Riders can play any shot for any team at any time.</p>
+          
+          <h4>Hazel Rule</h4>
+          <p>You can let Hazel start from your first putt and putt in. Her total putts are what you get.</p>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+  <!-- Register CTA -->
+  <section class="register-section">
+    <h2>Register</h2>
+    <p>Register as a full team or as an individual. If you don't have a foursome, we'll pair you up.</p>
+    <a href="/martin-memorial-golf-outing/register.html" class="cta-primary">Register your team</a>
+  </section>
+  
+  <!-- Footer -->
+  <footer class="footer">
+    Powered and built by NineBefore9
+  </footer>
+  
+  <script>
+    // Load navigation
+    fetch('/nav.html')
+      .then(response => response.text())
+      .then(html => {
+        document.getElementById('nav-container').innerHTML = html;
+      });
+  </script>
+</body>
+</html>
