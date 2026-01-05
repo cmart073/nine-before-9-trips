@@ -1,193 +1,109 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Chris Martin</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    
-    body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      background: #faf8f5;
-      color: #2a2520;
-      line-height: 1.6;
-    }
-    
-    .content {
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 6rem 2rem 4rem;
-      min-height: 100vh;
-    }
-    
-    .intro {
-      margin-bottom: 4rem;
-    }
-    
-    .intro h1 {
-      font-family: 'Crimson Pro', serif;
-      font-size: 3rem;
-      font-weight: 600;
-      line-height: 1.2;
-      margin-bottom: 1rem;
-      letter-spacing: -0.02em;
-    }
-    
-    .intro p {
-      font-size: 1.125rem;
-      color: #6a6560;
-      line-height: 1.7;
-      max-width: 600px;
-    }
-    
-    .projects {
-      display: grid;
-      gap: 2rem;
-      margin-top: 3rem;
-    }
-    
-    .project-card {
-      display: block;
-      padding: 2.5rem;
-      background: white;
-      border: 1px solid rgba(50, 45, 40, 0.1);
-      text-decoration: none;
-      color: #2a2520;
-      transition: all 0.3s ease;
-      position: relative;
-      overflow: hidden;
-    }
-    
-    .project-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 4px;
-      height: 100%;
-      background: #8b7355;
-      transform: scaleY(0);
-      transition: transform 0.3s ease;
-    }
-    
-    .project-card:hover {
-      transform: translateX(8px);
-      border-color: rgba(50, 45, 40, 0.2);
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
-    }
-    
-    .project-card:hover::before {
-      transform: scaleY(1);
-    }
-    
-    .project-tag {
-      display: inline-block;
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: #8b7355;
-      font-weight: 600;
-      margin-bottom: 0.75rem;
-    }
-    
-    .project-card h2 {
-      font-family: 'Crimson Pro', serif;
-      font-size: 1.75rem;
-      font-weight: 600;
-      margin-bottom: 0.5rem;
-      letter-spacing: -0.01em;
-    }
-    
-    .project-card p {
-      color: #6a6560;
-      line-height: 1.7;
-      font-size: 1rem;
-    }
-    
-    .project-card .arrow {
-      display: inline-block;
-      margin-left: 0.5rem;
-      transition: transform 0.3s ease;
-    }
-    
-    .project-card:hover .arrow {
-      transform: translateX(4px);
-    }
-    
-    .coming-soon {
-      opacity: 0.5;
-      cursor: default;
-      pointer-events: none;
-    }
-    
-    .coming-soon .project-tag {
-      color: #a0a0a0;
-    }
-    
-    @media (max-width: 640px) {
-      .content {
-        padding: 4rem 1.5rem 3rem;
-      }
-      
-      .intro h1 {
-        font-size: 2.25rem;
-      }
-      
-      .intro p {
-        font-size: 1.05rem;
-      }
-      
-      .project-card {
-        padding: 2rem;
-      }
-      
-      .project-card h2 {
-        font-size: 1.5rem;
-      }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nine Before 9 Trips - Premium Golf Travel Guides</title>
+    <meta name="description" content="Detailed, no-fluff golf trip planning guides for serious golfers. Real costs, honest recommendations, expert itineraries.">
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="canonical" href="https://ninebefore9.us/" />
+    <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
-  <div id="nav-container"></div>
-  
-  <div class="content">
-    <div class="intro">
-      <h1>You've found Chris Martin's corner of the internet.</h1>
-      <p>This is where I keep the various projects and services I've built over the years. Pick what you're looking for below.</p>
-    </div>
-    
-    <div class="projects">
-      <a href="/weddings.html" class="project-card">
-        <span class="project-tag">Active</span>
-        <h2>Wedding Ceremonies <span class="arrow">→</span></h2>
-        <p>Personal ceremony officiation for family and friends. Thoughtful, grounded, and written specifically for each couple.</p>
-      </a>
-      
-      <a href="/martin-memorial-golf-outing/" class="project-card">
-        <span class="project-tag">Active</span>
-        <h2>Jeff Martin Memorial Golf Outing <span class="arrow">→</span></h2>
-        <p>Annual 4-person scramble honoring Jeff Martin. Family, friends, and a day on the course — played with heart and a few house rules.</p>
-      </a>
-      
-      <!-- Add more projects as they come -->
-    </div>
-  </div>
-  
-  <script>
-    // Load navigation
-    fetch('/nav.html')
-      .then(response => response.text())
-      .then(html => {
-        document.getElementById('nav-container').innerHTML = html;
-      });
-  </script>
+    <header class="site-header">
+        <div class="container">
+            <div class="header-content">
+                <a href="/" class="logo">
+                    <img src="/logo.png" alt="Nine Before 9 Trips" style="height: 40px; vertical-align: middle; margin-right: 0.5rem;">
+                    Nine Before 9 Trips
+                </a>
+                <nav class="main-nav">
+                    <a href="/trips/">Trips</a>
+                    <a href="#about">About</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <h1>Golf Trip Planning.<br>Without the Fluff.</h1>
+                <p class="hero-subtitle">Detailed guides for serious golfers. Real costs, honest tradeoffs, and expert itineraries for the world's best golf destinations.</p>
+            </div>
+        </section>
+
+        <section id="destinations" class="destinations">
+            <div class="container">
+                <h2><a href="/trips/" style="color: inherit;">Trip Guides</a></h2>
+                
+                <div class="destination-grid">
+                    <a href="/trips/bandon-dunes/" class="destination-card available" style="text-decoration: none;">
+                        <div class="card-content">
+                            <h3>Bandon Dunes</h3>
+                            <p>Complete planning guide: costs, lodging strategy, tee times, seasonal timing, and sample itineraries.</p>
+                            <span class="card-meta">Oregon Coast</span>
+                        </div>
+                    </a>
+
+                    <a href="/trips/scotland-golf-trip-first-timers/" class="destination-card available" style="text-decoration: none;">
+                        <div class="card-content">
+                            <h3>Scotland for First-Timers</h3>
+                            <p>Complete guide to planning your first Scotland golf trip without overwhelm.</p>
+                            <span class="card-meta">Scotland</span>
+                        </div>
+                    </a>
+
+                    <a href="/trips/winter-buddy-golf-trips-usa/" class="destination-card available" style="text-decoration: none;">
+                        <div class="card-content">
+                            <h3>US Winter Buddy Trips</h3>
+                            <p>Best 3-4 day winter golf escapes: Scottsdale, Vegas, Palm Springs, and San Diego.</p>
+                            <span class="card-meta">Winter Destinations</span>
+                        </div>
+                    </a>
+
+                    <article class="destination-card coming-soon">
+                        <div class="card-content">
+                            <h3>Pinehurst Buddy Trip</h3>
+                            <p>The complete guide to planning a group trip to Pinehurst.</p>
+                            <span class="card-meta">Coming Soon</span>
+                        </div>
+                    </article>
+
+                    <article class="destination-card coming-soon">
+                        <div class="card-content">
+                            <h3>Ireland vs Scotland</h3>
+                            <p>Which destination is right for your group? An honest comparison.</p>
+                            <span class="card-meta">Coming Soon</span>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="about">
+            <div class="container">
+                <div class="about-content">
+                    <h2>Why This Exists</h2>
+                    <p>Most golf travel content is either affiliate spam or surface-level listicles. I built Nine Before 9 Trips to provide the kind of detailed, honest planning guides I wish existed when researching my own trips.</p>
+                    <p>Every guide includes real cost breakdowns, seasonal tradeoffs, and practical itineraries based on extensive research. No hype, no partnerships claiming to be unbiased, just useful information for golfers planning serious trips.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+        <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <nav class="footer-nav" style="margin-bottom: 1rem; display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap;">
+                    <a href="/about/" style="color: inherit;">About</a>
+                    <a href="/affiliate-disclosure/" style="color: inherit;">Affiliate Disclosure</a>
+                    <a href="/privacy/" style="color: inherit;">Privacy</a>
+                    <a href="/plan-my-trip/" style="color: inherit;">Contact</a>
+                </nav>
+                <p>&copy; 2025 Nine Before 9 Trips. All rights reserved.</p>
+            </div>
+        </div>
+        </footer>
 </body>
 </html>
